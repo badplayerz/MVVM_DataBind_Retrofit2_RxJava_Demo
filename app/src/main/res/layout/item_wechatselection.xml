@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+        
+        <variable
+            name="itemWechatSelection"
+            type="com.zlh.mvvp_databind_retrofit2_rxjava.viewmodel.ItemWechatSelectionViewModel"/>
+    </data>
+
+    
+    <RelativeLayout
+        android:id="@+id/item_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:onClick="@{itemWechatSelection::itemonclick}">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/item_circleimage"
+            android:layout_width="@dimen/item_wechatselection_circleimage_size"
+            android:layout_height="@dimen/item_wechatselection_circleimage_size"
+            app:imageUrl="@{itemWechatSelection.firstImg}"
+            app:imageNull="@{@drawable/walle}"
+            tools:src="@mipmap/ic_launcher"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/item_circleimage"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp">
+            <TextView
+                android:id="@+id/item_titletext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/activity_horizontal_margin"
+                android:text="@{itemWechatSelection.title}"
+                tools:text="微信文章"/>
+            <TextView
+                android:id="@+id/item_sourcetext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_titletext"
+                android:layout_marginTop="5dp"
+                android:text="@{itemWechatSelection.source}"
+                tools:text="来源"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>
+
+

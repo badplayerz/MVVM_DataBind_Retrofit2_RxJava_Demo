@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="wechatSelectionViewModel"
+            type="com.zlh.mvvp_databind_retrofit2_rxjava.viewmodel.WechatSelectionViewModel"/>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".view.WechatSelectionActivity"
+        tools:showIn="@layout/activity_wechatselection">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/wechat_recycleview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+</layout>

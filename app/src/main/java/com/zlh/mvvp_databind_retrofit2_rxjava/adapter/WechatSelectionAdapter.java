@@ -66,6 +66,11 @@ public class WechatSelectionAdapter extends RecyclerView.Adapter<WechatSelection
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if(null == list){
+            return 0;
+        }else{
+            return list.size();
+        }
+
     }
 }

@@ -13,9 +13,12 @@ import com.zlh.mvvp_databind_retrofit2_rxjava.interf.WechatSelectionInterf;
 import com.zlh.mvvp_databind_retrofit2_rxjava.model.WechatSelectionBean;
 import com.zlh.mvvp_databind_retrofit2_rxjava.network.NetWorkManager;
 
+import java.util.List;
+
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -78,20 +81,28 @@ public class WechatSelectionViewModel implements WechatSelectionInterf.ViewModel
                 .getList(1,20,"json",NetWorkManager.WECHATSELECTION_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<WechatSelectionBean>() {
+                .filter(new Func1<WechatSelectionBean, Boolean>() {         //截取reason为success的数据
                     @Override
-                    public void call(WechatSelectionBean wechatSelectionBean) {
-
-                        if(wechatSelectionBean.getReason().equals("success")){
-                            Log.e("hhh","hhh");
-                            hiddenProgress(null);
-                            mMainView.loadDataRecycleView(wechatSelectionBean.getResult().getList());
-                        }
+                    public Boolean call(WechatSelectionBean wechatSelectionBean) {
+                        return wechatSelectionBean.getReason().equals("success");
+                    }
+                })
+                .map(new Func1<WechatSelectionBean, WechatSelectionBean.ResultBean>() { //转换数据，只接收result数据
+                    @Override
+                    public WechatSelectionBean.ResultBean call(WechatSelectionBean wechatSelectionBean) {
+                        return wechatSelectionBean.getResult();
+                    }
+                })
+                .subscribe(new Action1<WechatSelectionBean.ResultBean>() {
+                    @Override
+                    public void call(WechatSelectionBean.ResultBean resultBean) {
+                        hiddenProgress(null);
+                        mMainView.loadDataRecycleView(resultBean.getList());
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        Log.e("kkk","kkk");
+                        Log.e("kkk", "kkk");
                         hiddenProgress("1");
                     }
                 });
@@ -102,6 +113,7 @@ public class WechatSelectionViewModel implements WechatSelectionInterf.ViewModel
      * @param view
      */
     public void onClickFabLoad(View view) {
+
         Snackbar.make(view, "It is a fab button", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }

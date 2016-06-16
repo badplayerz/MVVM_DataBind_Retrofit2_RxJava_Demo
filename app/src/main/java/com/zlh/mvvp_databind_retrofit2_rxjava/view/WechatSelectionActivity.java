@@ -21,6 +21,7 @@ import com.zlh.mvvp_databind_retrofit2_rxjava.interf.WechatSelectionInterf;
 import com.zlh.mvvp_databind_retrofit2_rxjava.model.WechatSelectionBean;
 import com.zlh.mvvp_databind_retrofit2_rxjava.network.NetWorkManager;
 import com.zlh.mvvp_databind_retrofit2_rxjava.viewmodel.WechatSelectionViewModel;
+import com.zlh.view_loading.LoadingView;
 
 import java.util.List;
 
@@ -42,7 +43,6 @@ public class WechatSelectionActivity extends BaseAcivity implements WechatSelect
         initDataBinding();
         setRecycleView();
         postNet();
-//        activityWechatselectionBinding.contentWechatselection.wechatRecycleview
     }
 
     private void initDataBinding(){

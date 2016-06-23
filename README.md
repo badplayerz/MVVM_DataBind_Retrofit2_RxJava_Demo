@@ -2,6 +2,7 @@
   
   使用了DataBind实现MVVM的demo。<br>
   应用到了retrofit2、rxjava、rxandroid、Android L的Transition动画（sdkVersion>=21）。<br>
+  用rxjava实现了eventbus、otto功能，实现低耦合数据数据传递（如activity、fragment、service之间）<br>
   接口使用了聚合数据的微信经典文章。<br>
   Transition动画与webview的配合不好（与其他类似textview配合良好），请大家提出意见或修改之。
   <br>

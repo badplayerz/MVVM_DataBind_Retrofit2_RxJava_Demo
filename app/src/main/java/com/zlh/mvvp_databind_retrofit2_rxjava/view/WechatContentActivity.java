@@ -16,9 +16,12 @@ import android.webkit.WebViewClient;
 
 import com.bumptech.glide.Glide;
 import com.zlh.mvvp_databind_retrofit2_rxjava.R;
+import com.zlh.mvvp_databind_retrofit2_rxjava.RxBus.RxBus;
+import com.zlh.mvvp_databind_retrofit2_rxjava.adapter.ContentViewPagerAdapter;
 import com.zlh.mvvp_databind_retrofit2_rxjava.databinding.ActivityWechatContentBinding;
 import com.zlh.mvvp_databind_retrofit2_rxjava.interf.BaseInterf;
 import com.zlh.mvvp_databind_retrofit2_rxjava.interf.WechatSelectionInterf;
+import com.zlh.mvvp_databind_retrofit2_rxjava.model.ContentBus;
 import com.zlh.mvvp_databind_retrofit2_rxjava.model.WechatSelectionBean;
 import com.zlh.mvvp_databind_retrofit2_rxjava.viewmodel.WechatContentViewModel;
 
@@ -57,6 +60,8 @@ public class WechatContentActivity extends BaseAcivity implements BaseInterf.Mai
                     .into(activityWechatContentBinding.contentToolimage);
         }
 
+        initViewPager();
+
     }
 
     private void initDataBind(){
@@ -65,6 +70,13 @@ public class WechatContentActivity extends BaseAcivity implements BaseInterf.Mai
         activityWechatContentBinding.setWechatContentViewModel(wechatContentViewModel);
         setSupportActionBar(activityWechatContentBinding.toolbar);
 
+        RxBus.getRxBus().post(new ContentBus(listBean.getUrl()));
+    }
+
+    private void initViewPager(){
+        ContentViewPagerAdapter contentViewPagerAdapter = new ContentViewPagerAdapter(getSupportFragmentManager());
+        contentViewPagerAdapter.addFragment(ContentFragment.newInstance(listBean.getUrl()));
+        activityWechatContentBinding.contentViewpager.setAdapter(contentViewPagerAdapter);
     }
 
     @Override
@@ -85,5 +97,20 @@ public class WechatContentActivity extends BaseAcivity implements BaseInterf.Mai
         }
         super.onBackPressed();
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

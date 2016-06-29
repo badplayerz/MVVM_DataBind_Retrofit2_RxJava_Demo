@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.util.Log;
+import android.util.TimeUtils;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,6 +27,10 @@ import com.zlh.mvvp_databind_retrofit2_rxjava.model.WechatSelectionBean;
 import com.zlh.mvvp_databind_retrofit2_rxjava.viewmodel.WechatContentViewModel;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
+import rx.functions.Action1;
 
 public class WechatContentActivity extends BaseAcivity implements BaseInterf.MainView {
 
@@ -49,7 +54,7 @@ public class WechatContentActivity extends BaseAcivity implements BaseInterf.Mai
         Log.e("gggg",listBean.getFirstImg());
 
         initDataBind();
-
+        initViewPager();
 
         if(Build.VERSION.SDK_INT >= 21){
             activityWechatContentBinding.contentToolimage.setTransitionName(listBean.getFirstImg()+"pic");
@@ -60,7 +65,13 @@ public class WechatContentActivity extends BaseAcivity implements BaseInterf.Mai
                     .into(activityWechatContentBinding.contentToolimage);
         }
 
-        initViewPager();
+        Observable.timer(500,TimeUnit.MILLISECONDS).subscribe(new Action1<Long>() {
+            @Override
+            public void call(Long aLong) {
+                Log.e("hhhh","hhhh");
+                RxBus.getRxBus().post(new ContentBus(listBean.getUrl()));
+            }
+        });
 
     }
 
@@ -70,13 +81,15 @@ public class WechatContentActivity extends BaseAcivity implements BaseInterf.Mai
         activityWechatContentBinding.setWechatContentViewModel(wechatContentViewModel);
         setSupportActionBar(activityWechatContentBinding.toolbar);
 
-        RxBus.getRxBus().post(new ContentBus(listBean.getUrl()));
+
     }
 
     private void initViewPager(){
         ContentViewPagerAdapter contentViewPagerAdapter = new ContentViewPagerAdapter(getSupportFragmentManager());
         contentViewPagerAdapter.addFragment(ContentFragment.newInstance(listBean.getUrl()));
         activityWechatContentBinding.contentViewpager.setAdapter(contentViewPagerAdapter);
+
+
     }
 
     @Override

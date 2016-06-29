@@ -10,6 +10,16 @@ import com.zlh.mvvp_databind_retrofit2_rxjava.interf.BaseInterf;
 import com.zlh.mvvp_databind_retrofit2_rxjava.interf.WechatSelectionInterf;
 import com.zlh.mvvp_databind_retrofit2_rxjava.model.WechatSelectionBean;
 
+import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.observers.SerializedSubscriber;
+
 /**
  * Created by sdbean-zlh on 16/5/26.
  */

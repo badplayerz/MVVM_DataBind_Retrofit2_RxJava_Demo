@@ -12,10 +12,18 @@
         android:layout_height="match_parent"
         tools:context="com.zlh.mvvp_databind_retrofit2_rxjava.view.ContentFragment">
 
-        <WebView
-            android:id="@+id/content_webview"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <WebView
+                android:id="@+id/content_webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
 
     </FrameLayout>
 

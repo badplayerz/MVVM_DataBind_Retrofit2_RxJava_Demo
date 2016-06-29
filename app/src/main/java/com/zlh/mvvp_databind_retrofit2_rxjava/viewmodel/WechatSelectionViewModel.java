@@ -8,13 +8,17 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.common.eventbus.Subscribe;
+import com.zlh.mvvp_databind_retrofit2_rxjava.app.Tools;
 import com.zlh.mvvp_databind_retrofit2_rxjava.app.WechatSelectionApplication;
 import com.zlh.mvvp_databind_retrofit2_rxjava.interf.WechatSelectionInterf;
 import com.zlh.mvvp_databind_retrofit2_rxjava.model.WechatSelectionBean;
 import com.zlh.mvvp_databind_retrofit2_rxjava.network.NetWorkManager;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import rx.Observable;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -113,7 +117,7 @@ public class WechatSelectionViewModel implements WechatSelectionInterf.ViewModel
      * @param view
      */
     public void onClickFabLoad(View view) {
-
+        if(Tools.checkButtonClick()) return;
         Snackbar.make(view, "It is a fab button", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }

@@ -18,6 +18,8 @@ public class RxBus {
         subject = new SerializedSubject<>(PublishSubject.create());
     }
 
+    public Throwable e;
+
 
     /**
      * Double Checked locking单例

@@ -88,11 +88,12 @@
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"/>
 
+            <!--
             <WebView
                 android:id="@+id/content_webview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:webLoadUrl="@{wechatContentViewModel.weburl}"/>
+                app:webLoadUrl="@{wechatContentViewModel.weburl}"/>-->
             <android.support.v4.view.ViewPager
                 android:id="@+id/content_viewpager"
                 android:layout_width="match_parent"
